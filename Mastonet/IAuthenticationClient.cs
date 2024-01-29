@@ -19,5 +19,5 @@ public interface IAuthenticationClient
 
     Task Revoke(string token);
 
-    string OAuthUrl(string? redirectUri = null);
+    string OAuthUrl(string? redirectUri = null, bool forceLogin = true, string? language = null);
 }

@@ -7,13 +7,17 @@ namespace Mastonet;
 
 public class MediaDefinition
 {
-    public MediaDefinition(Stream media, string fileName)
+    //public MediaDefinition(Stream media, string fileName)
+    public MediaDefinition(byte[] data, string fileName)
     {
-        this.Media = media ?? throw new ArgumentException("All the params must be defined", nameof(media));
+        //this.Media = media ?? throw new ArgumentException("All the params must be defined", nameof(media));
+        this.Data = data ?? throw new ArgumentException("All the params must be defined", nameof(data));
         this.FileName = fileName ?? throw new ArgumentException("All the params must be defined", nameof(fileName));
     }
 
-    public Stream Media { get; set; }
+    //public Stream Media { get; set; }
+    
+    public byte[] Data { get; set; }
 
     public string FileName { get; set; }
 

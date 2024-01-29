@@ -336,12 +336,12 @@ public partial class MastodonClient : BaseHttpClient, IMastodonClient
     /// <summary>
     /// Uploading a media attachment
     /// </summary>
-    /// <param name="data">Media stream to be uploaded</param>
+    /// <param name="data">bytes of the image to be uploaded</param>
     /// <param name="fileName">Media file name (must contains extension ex: .png, .jpg, ...)</param>
     /// <param name="description">A plain-text description of the media for accessibility (max 420 chars)</param>
     /// <param name="focus">Two floating points. See <see cref="https://docs.joinmastodon.org/api/rest/media/#focal-points">focal points</see></param>
     /// <returns>Returns an Attachment that can be used when creating a status</returns>
-    public Task<Attachment> UploadMedia(Stream data, string fileName = "file", string? description = null,
+    public Task<Attachment> UploadMedia(byte[] data, string fileName = "file", string? description = null,
         AttachmentFocusData? focus = null)
     {
         return UploadMedia(new MediaDefinition(data, fileName), description, focus);
