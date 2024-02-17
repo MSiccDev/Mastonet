@@ -13,12 +13,12 @@ public interface IMastodonClient
 
     #region MastodonClient
 
-    /// <summary>
-    /// Getting instance information
-    /// </summary>
-    /// <returns>Returns the current Instance. Does not require authentication</returns>
-    [Obsolete("This method is deprecated on Mastodon v4. Use GetInstanceV2() instead.")]
-    Task<Instance> GetInstance();
+    // /// <summary>
+    // /// Getting instance information
+    // /// </summary>
+    // /// <returns>Returns the current Instance. Does not require authentication</returns>
+    // [Obsolete("This method is deprecated on Mastodon v4. Use GetInstanceV2() instead.")]
+    // Task<Instance> GetInstance();
 
     /// <summary>
     /// Getting instance information

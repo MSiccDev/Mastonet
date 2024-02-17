@@ -38,7 +38,9 @@ public class VisibilityConverter : JsonConverter<Visibility>
     {
         var val = reader.GetString();
 
+#pragma warning disable CS8604 // Possible null reference argument.
         var result = Enum.Parse(typeof(Visibility), val, true);
+#pragma warning restore CS8604 // Possible null reference argument.
 
         return (Visibility) result;
     }
