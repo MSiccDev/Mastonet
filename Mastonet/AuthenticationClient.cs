@@ -101,7 +101,7 @@ public class AuthenticationClient : BaseHttpClient, IAuthenticationClient
         return Post<Auth>("/oauth/token", data);
     }
 
-    public string OAuthUrl(string? redirectUri = null)
+    public string OAuthUrl(string? redirectUri = null, bool forceLogin = true, string? language = null)
     {
         if (AppRegistration == null)
         {
@@ -116,8 +116,10 @@ public class AuthenticationClient : BaseHttpClient, IAuthenticationClient
         {
             redirectUri = "urn:ietf:wg:oauth:2.0:oob";
         }
+        if (string.IsNullOrWhiteSpace(language))
+            language = "en";
 
-        return $"https://{this.Instance}/oauth/authorize?response_type=code&client_id={AppRegistration.ClientId}&scope={AppRegistration.Scope.Replace(" ", "%20")}&redirect_uri={redirectUri ?? "urn:ietf:wg:oauth:2.0:oob"}";
+        return $"https://{this.Instance}/oauth/authorize?response_type=code&client_id={AppRegistration.ClientId}&scope={AppRegistration.Scope.Replace(" ", "%20")}&redirect_uri={redirectUri ?? "urn:ietf:wg:oauth:2.0:oob"}&force_login={forceLogin}&lang={language}";
     }
 
     /// <summary>

@@ -25,7 +25,7 @@ namespace Mastonet;
 [JsonSerializable(typeof(Filter))]
 [JsonSerializable(typeof(IdentityProof))]
 [JsonSerializable(typeof(InstanceV2))]
-[JsonSerializable(typeof(Instance))]
+// [JsonSerializable(typeof(Instance))]
 [JsonSerializable(typeof(List<Account>))]
 [JsonSerializable(typeof(Marker))]
 [JsonSerializable(typeof(Notification))]

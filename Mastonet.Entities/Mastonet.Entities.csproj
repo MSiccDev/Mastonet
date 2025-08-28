@@ -24,7 +24,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Text.Json" Version="8.0.0" />
+        <PackageReference Include="System.Text.Json" Version="9.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -36,6 +36,8 @@
             <Pack>True</Pack>
             <PackagePath>\</PackagePath>
         </None>
+        <Compile Remove="InstanceV1.cs" />
+        <None Include="InstanceV1.cs" />
     </ItemGroup>
 
 

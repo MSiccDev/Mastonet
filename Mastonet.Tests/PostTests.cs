@@ -17,13 +17,9 @@ namespace Mastonet.Tests
         {
             var client = GetTestClient();
 
-            System.IO.FileStream fs = new System.IO.FileStream(
-                @"./testimage.png",
-                System.IO.FileMode.Open,
-                System.IO.FileAccess.Read);
-            var attachment = await client.UploadMedia(fs, "testimage.png");
-            fs.Dispose();
-
+            var bytes = await File.ReadAllBytesAsync($"./testimage.png");
+            var attachment = await client.UploadMedia(bytes, "testimage.png");
+            
             Assert.NotNull(attachment);
             Assert.NotNull(attachment.PreviewUrl);
             Assert.NotNull(attachment.Url);
@@ -45,15 +41,12 @@ namespace Mastonet.Tests
             var attachments = new List<Attachment>();
             for (var i = 0; i < 4; i++)
             {
-                using (var fs = new System.IO.FileStream($"./testimage.png", FileMode.Open, FileAccess.Read))
-                {
-                    var attachment = await client.UploadMedia(fs, $"testimage-{i}.png");
-                    Assert.NotNull(attachment);
-                    Assert.NotNull(attachment.PreviewUrl);
-                    Assert.NotNull(attachment.Url);
-                    attachments.Add(attachment);
-                }
-
+                var bytes = await File.ReadAllBytesAsync($"./testimage.png");
+                var attachment = await client.UploadMedia(bytes, $"testimage-{i}.png");
+                Assert.NotNull(attachment);
+                Assert.NotNull(attachment.PreviewUrl);
+                Assert.NotNull(attachment.Url);
+                attachments.Add(attachment);
                 ;
             }
 

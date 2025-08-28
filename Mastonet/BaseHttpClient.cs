@@ -209,7 +209,33 @@ public abstract partial class BaseHttpClient
         {
             foreach (var m in media)
             {
-                content.Add(new StreamContent(m.Media), m.ParamName!, m.FileName);
+                //content.Add(new StreamContent(m.Media), m.ParamName!, m.FileName);
+
+
+                // var streamContent = new StreamContent(m.Media);
+                var byteContent = new ByteArrayContent(m.Data);
+                var fileExtension = Path.GetExtension(m.FileName);
+                if (!string.IsNullOrWhiteSpace(fileExtension))
+                {
+                    var mimeType = fileExtension switch
+                    {
+                        ".jpg" => "image/jpeg",
+                        "jpeg" => "image/jpeg",
+                        "png" => "image/png",
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+
+                    byteContent.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+                }
+
+                byteContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+                {
+                    Name = m.ParamName,
+                    FileName = m.FileName,
+                    FileNameStar = m.FileName
+                };
+
+                content.Add(byteContent);
             }
         }
 
@@ -283,7 +309,7 @@ public abstract partial class BaseHttpClient
             {
                 foreach (var m in media)
                 {
-                    content.Add(new StreamContent(m.Media), m.ParamName!, m.FileName);
+                    content.Add(new ByteArrayContent(m.Data), m.ParamName!, m.FileName);
                 }
             }
 
